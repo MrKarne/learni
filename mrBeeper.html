@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beep Sound Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Beep Sound Player</h1>
+        <button onclick="startBeeping(30000, 90000, 16)">Start Beeping run</button>
+        <button onclick="startBeeping(30000, 30000, 11)">Start Beeping stretch</button>
+    </div>
+    <audio id="beepSound" src="https://soundbible.com/mp3/Censored_Beep-Mastercard-569981218.mp3"></audio>
+    <script>
+        function startBeeping(a, b, c) {
+            const beepSound = document.getElementById('beepSound');
+            const beepCount = c;
+            const breaks = [a, b]; // In milliseconds
+            let currentBeep = 0;
+
+            function playBeep() {
+                if (currentBeep < beepCount) {
+                    beepSound.play();
+                    setTimeout(() => {
+                        playBeep();
+                    }, breaks[currentBeep % breaks.length]);
+                    currentBeep++;
+                }
+            }
+            playBeep();
+        }
+    </script>
+</body>
+</html>
